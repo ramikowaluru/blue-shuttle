@@ -245,7 +245,10 @@ export default function DashboardPage() {
               <span>💳</span>
               <span className="font-medium">Make a Payment</span>
             </button>
-            <button className="w-full p-4 bg-white rounded-lg border border-neutral-border text-left flex items-center gap-3 hover:bg-gray-50 touch-manipulation">
+            <button
+              onClick={() => router.push('/players')}
+              className="w-full p-4 bg-white rounded-lg border border-neutral-border text-left flex items-center gap-3 hover:bg-gray-50 touch-manipulation"
+            >
               <span>👥</span>
               <span className="font-medium">Players List</span>
             </button>
