@@ -15,8 +15,7 @@ export default function LoginPage() {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
-  async function handleSubmit(e: React.FormEvent) {
-    e.preventDefault();
+  async function handleLogin(email: string, password: string) {
     setError('');
     setLoading(true);
 
@@ -44,6 +43,22 @@ export default function LoginPage() {
       setError(err.message || 'Failed to sign in');
     } finally {
       setLoading(false);
+    }
+  }
+
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    await handleLogin(email, password);
+  }
+
+  async function handleAdminLogin() {
+    const adminEmail = process.env.NEXT_PUBLIC_ADMIN_EMAIL || process.env.ADMIN_EMAIL;
+    const adminPassword = process.env.NEXT_PUBLIC_ADMIN_PASSWORD || process.env.ADMIN_PASSWORD;
+
+    if (adminEmail && adminPassword) {
+      await handleLogin(adminEmail, adminPassword);
+    } else {
+      setError('Admin credentials not configured');
     }
   }
 
@@ -87,6 +102,22 @@ export default function LoginPage() {
           {loading ? 'Signing in...' : 'Sign In'}
         </Button>
       </form>
+
+      <div className="mt-6 pt-4 border-t border-neutral-border">
+        <Button
+          type="button"
+          onClick={handleAdminLogin}
+          fullWidth
+          variant="secondary"
+          disabled={loading}
+          className="bg-black text-white hover:bg-gray-800"
+        >
+          {loading ? 'Signing in...' : '🔑 Quick Admin Login'}
+        </Button>
+        <p className="mt-2 text-xs text-center text-gray-500">
+          Admin quick access
+        </p>
+      </div>
 
       <p className="mt-4 text-center text-sm text-gray-600">
         Don't have an account?{' '}
