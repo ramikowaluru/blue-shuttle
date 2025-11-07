@@ -197,7 +197,10 @@ export default function AdminDashboardPage() {
               <span>✚</span>
               <span className="font-medium">Create New Session</span>
             </button>
-            <button className="w-full p-4 bg-white rounded-lg border border-neutral-border text-left flex items-center gap-3 hover:bg-gray-50 touch-manipulation">
+            <button
+              onClick={() => router.push('/admin/payments')}
+              className="w-full p-4 bg-white rounded-lg border border-neutral-border text-left flex items-center gap-3 hover:bg-gray-50 touch-manipulation"
+            >
               <span>💳</span>
               <span className="font-medium">Manage Payments</span>
             </button>
